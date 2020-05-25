@@ -1,0 +1,213 @@
+---
+title: "Tarea6"
+author: "Carlos Gálvez"
+date: "5/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, engine.path = list(
+  octave = '/usr/bin/octave'
+))
+
+library(reticulate)
+
+library(matlib)
+```
+
+1.
+R)
+```{r}
+A=rbind(c(10,2,-1,1,0,10),
+        c(-1,-3,0,0,-1,5),
+        c(0,-1,3,-1,0,0),
+        c(17,1,0,3,5,-15),
+        c(0,-10,0,-5,3,0),
+        c(-3,1,1,1,-2,2))
+b=c(0,5,5,4,-21,11)
+Ab=cbind(A,b)
+qr(A)$rank==qr(Ab)$rank
+qr(A)$rank==3
+solve(A,b)
+
+```
+
+PYTHON)
+```{python}
+import numpy as np
+
+A = np.array([[10,2,-1,1,0,10],
+              [-1,-3,0,0,-1,5],
+              [0,-1,3,-1,0,0],
+              [17,1,0,3,5,-15],
+              [0,-10,0,-5,3,0],
+              [-3,1,1,1,-2,2]])
+b = np.array([0,5,5,4,-21,11])
+AB = np.array([[10,2,-1,1,0,10,0],[-1,-3,0,0,-1,5,5],[0,-1,3,-1,0,0,5],[17,1,0,3,5,-15,4],[0,-10,0,-5,3,0,-21],[-3,1,1,1,-2,2,11]])
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+np.linalg.matrix_rank(A) == 3
+np.linalg.solve(A, b)
+
+```
+
+OCTAVE)
+```{octave}
+A = [10 2 -1 1 0 10; 
+     -1 -3 0 0 -1 5; 
+     0 -1 3 -1 0 0; 
+     17 1 0 3 5 -15; 
+     0 -10 0 -5 3 0; 
+     -3 1 1 1 -2 2];
+b = [0; 5; 5; 4; -21; 11];
+AB = [A b];
+rank(A)==rank(AB);
+rank(A) == 3;
+x = linsolve(A,b);
+```
+
+2.
+
+R)
+```{r}
+A=rbind(c(-2,2,-1,1,0,4,0),
+        c(-1,-3,0,0,-1,5,-2),
+        c(0,-1,3,-1,0,0,0),
+        c(0,1,0,3,-2,1,4),
+        c(0,-3,0,-5,3,0,-2),
+        c(-3,1,1,1,-2,2,1))
+b=c(5,3,5,0,5,0)
+Ab=cbind(A,b)
+qr(A)$rank==qr(Ab)$rank
+qr(A)$rank==length(A[1,])
+Solve(A,b, fractions=TRUE)
+```
+PYTHON)
+```{python}
+from sympy import Matrix, S, linsolve, symbols
+a,b,c,d,e,f,g = symbols('a,b,c,d,e,f,g')
+A = Matrix([
+    [-2,2,-1,1,0,4,0],
+    [-1,-3,0,0,-1,5,-2],
+    [0,-1,3,-1,0,0,0],
+    [0,1,0,3,-2,1,4],
+    [0,-3,0,-5,3,0,-2],
+    [-3,1,1,1,-2,2,1]
+    ])
+b = Matrix([5,3,5,0,5,0])
+AB = A.col_insert(A.cols, b)
+A.rank() == AB.rank()
+A.rank == A.cols
+linsolve(AB, (a,b,c,d,e,f,g))
+```
+OCTAVE)
+```{octave}
+A = [-2 2 -1 1 0 4 0; 
+     -1 -3 0 0 -1 5 -2; 
+     0 -1 3 -1 0 0 0; 
+     0 1 0 3 -2 1 4; 
+     0 -3 0 -5 3 0 -2; 
+     -3 1 1 1 -2 2 1];
+b = [5; 3; 5; 0; 5; 0];
+AB = [A b];
+rank(A)==rank(AB);
+disp(rank(A) == length(A));
+x = rref(AB);
+x
+```
+
+3.
+
+R)
+```{r}
+A=rbind(c(10,2,-1,1,0,10),
+        c(-1,-3,0,0,-1,5),
+        c(9,-1,-1,1,-1,15),
+        c(17,1,0,3,5,-15),
+        c(0,-10,0,-5,3,0),
+        c(-3,1,1,1,-2,2))
+b=c(0,5,0,4,-21,11)
+Ab=cbind(A,b)
+qr(A)$rank==qr(Ab)$rank
+```
+
+PYTHON)
+```{python}
+from sympy import Matrix, S, linsolve, symbols
+a,b,c,d,e,f,g = symbols('a,b,c,d,e,f,g')
+A = Matrix([
+    [10,2,-1,1,0,10],
+    [-1,-3,0,0,-1,5],
+    [9,-1,-1,1,-1,15],
+    [17,1,0,3,5,-15],
+    [0,-10,0,-5,3,0],
+    [-3,1,1,1,-2,2]
+    ])
+b = Matrix([0,5,0,4,-21,11])
+AB = A.col_insert(A.cols, b)
+A.rank() == AB.rank()
+```
+OCTAVE)
+```{octave}
+A = [10 2 -1 1 0 10; 
+     -1 -3 0 0 -1 5; 
+     9 -1 -1 1 -1 15; 
+     17 1 0 3 5 -15; 
+     0 -10 0 -5 3 0; 
+     -3 1 1 1 -2 2];
+b = [0; 5; 0; 4; -21; 11];
+AB = [A b];
+disp(rank(A)==rank(AB));
+```
+
+El rango de la matriz es diferente del rango de la ampliada, por lo tanto siguiendo el teorema de Rouché-Frobenius se trata de un sistema incompatible
+
+4.
+
+a)
+$$ 
+AX + 3B = -5X \\
+AX + 5X = -3B\\
+(A+5)X = -3B\\
+X = (A+5)^{-1} \cdot -3B
+$$
+
+```{python}
+import numpy as np
+
+A = np.array([
+    [-6, -3],
+    [0, -3]
+    ])
+B = np.array([
+    [-1, 0],
+    [4, -2]
+    ])
+X = np.linalg.inv(A+5).dot(-3*B)
+X
+```
+
+b)
+$$
+ACX + 3B = 10I - X\\
+ACX + X = 10I - 3B\\
+(AC+I) X = 10I - 3B\\
+X = (AC+I)^{-1} (10I -3B)
+$$
+```{python}
+import numpy as np
+A = np.array([
+    [1, 2],
+    [0, 2]
+    ])
+B = np.array([
+    [2, -1],
+    [-1, 5]
+    ])
+C = np.array([
+    [2, 6],
+    [1, -0.5]
+    ])
+I = np.identity(2)  
+X = np.linalg.inv(A.dot(C)+I).dot((10*I)-(3*B))
+X
+```
