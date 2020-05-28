@@ -1,0 +1,249 @@
+---
+title: "Tarea-11"
+author: "Carlos Gálvez"
+date: "4/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Pregunta 1
+Encontrar un vector equivalente a $\vec{AB}$ donde A = (1, 2) y B = (0, 3)
+
+$\vec{AB} = (0-1, 3-2) = (-1, 1)$
+
+C = (2, 3)
+D = (1, 4)
+
+$\vec{CD} = (1-2, 4-3) = (-1, 1)$
+
+
+## Pregunta 2
+Encontrar un vector equivalente a AB~ con A = (3, 5) y B = (6, −2) tal que su origen esté en el punto
+C = (−1, 0)
+
+$\vec{AB} = (6-3, -2-5) = (3, -7)$
+
+D = (2, -7)
+
+$\vec{CD} = (2+1, -7-0) = (3, -7)$
+
+## Pregunta 3
+Encontrar el módulo, dirección y sentido del vector de componentes (7, −5)
+
+Módulo:
+$\vec{V} = (7, -5)$
+$||\vec{V}|| = \sqrt{7^2+(-5)^2} = \sqrt{49+25} = \sqrt{74}$
+
+Dirección:
+$\alpha = \arctan-\frac{5}{7} = -0.6202495\ rad$
+$\alpha = -0.6202495\ rad\cdot \frac{180^\circ}{\pi\ rad} = -35.53768^\circ$
+$\alpha = 360^\circ - 35.53768^\circ = 324.4623^\circ$
+
+Sentido:
++-
+
+## Pregunta 4
+Dado el vector de módulo 8 y el hecho de que forma un ángulo de 135º con el eje OX, calculad sus componentes
+
+$||\vec{V}|| = 8$
+$\alpha = 135^\circ$
+$V_{x} = ||\vec{V}||\cdot\cos\ \alpha = 8\cdot\cos\ 135 = -7.968703$
+$V_{y} = ||\vec{V}||\cdot\sin\ \alpha = 8\cdot\sin\ 135 = 0.7069495$
+
+
+## Pregunta 5
+Dados los puntos A = (1, 2, 3), B = (0, −1, 2) y C = (−2, −7, 0), si D = (−1, x, 0) encontrad, si es posible, el valor de x para que los vectores AB~ y CD~ sean paralelos.
+7
+$\vec{AB} = (0-1, -1-2, 2-3) = (-1, -3, -1)$
+$\vec{CD} = (-1+2, x+7, 0) = (1, x+7, 0)$
+
+
+
+$$-\lambda = 1 \\
+-3\lambda = x+7 \\
+-\lambda = 0
+
+$$
+
+No es posible hallar un valor de $x$ queya que $\lambda$ no puede valer -1 y 0
+
+
+## Pregunta 6
+Dados los vectores u = (2, 3, 0) y v = (−3, 0, 1), encontrad el valor de k para que los vectores w, z sean
+paralelos donde w = 2u − v y z = −3u + kv
+
+$$
+\vec{w} = 2\vec{u} - \vec{v} = (4, 6, 0) - (-3, 0, 1) =(4-(-3), 6-0, 0-1)\\
+= (7, 6, -1)
+$$
+$$
+\vec{z} = -3(2, 3, 0) + k(-3, 0, 1) = (-6, -9, 0) + k(-3, 0, 1) = \\
+=(-6, -9, 0) + (-3k, 0, k) = (18k, -9, k)\\
+$$
+
+
+$$
+\frac{7}{18k} = \frac{6}{-9} = \frac{-1}{k}
+$$
+
+$$
+\frac{6\cdot18k}{-9} = 7 \\
+\frac{108k}{-9} = 7 \\
+108k = 7 \cdot -9 \\
+k = \frac{-63}{108} = \frac{-7}{12}
+$$
+
+$$
+\frac{6}{-9} \ne \frac{1}{\frac{7}{12}}\\
+
+$$
+
+No existe un valor $k$ que haga que dichos vectores sean paralelos
+
+## Pregunta 7
+¿Es el vector (1, 2, 3) combinación lineal de los vectores (2, 3, 0) y (−5, 0, 2)?
+
+$$
+(1, 2, 3) = a(2, 3, 0) + b(-5,0,2) \\
+$$
+$$
+\left \{ \begin{matrix} 2a &-&5b &= &1  
+\\ 3a& & &=&2 
+\\ & & 2b &= &3
+\end{matrix}\right.
+\\a = \frac{2}{3}
+\\b = \frac{3}{2}
+\\2\cdot(\frac{2}{3}) - 5 \cdot \frac{3}{2} = \frac{4}{3}-\frac{15}{2} \neq 1 
+$$
+
+El vector (1, 2, 3) no es combinación lineal de los vectores (2, 3, 0) y (−5, 0, 2)
+
+
+## Pregunta 8
+Dados los vectores u = (2, 1, 0), v = (−3, 4, 1) y w = (1, 0, −5)
+• Comprobad que el producto escalar cumple la propiedad conmutativa
+• Comprobad que el producto escalar cumple la propiedad distributiva
+• Comprobad que el producto escalar cumple la propiedad asociativa entre escalares y vectores
+  
+### Conmutativa
+$(\vec{u}, \vec{v}) = (\vec{v}, \vec{u})$
+
+$(\vec{u}, \vec{v}) =(2\cdot-3 + 1\cdot4+0\cdot1) = -2$
+$(\vec{v}, \vec{u}) = (-3\cdot2+4\cdot1+1\cdot0)= -2$
+
+### Distributiva
+$(\vec{u}, (\vec{v}+\vec{w})) = (\vec{u}, \vec{v}) + (\vec{u}, \vec{w})$
+
+$(\vec{u}, \vec{w}) = (2\cdot1+1\cdot0+0\cdot-5) = 2 $
+$(\vec{u}, \vec{v}) + (\vec{u}, \vec{w}) = -2 + 2 = 0$ 
+
+$\vec{vw} = (\vec{v}+\vec{w}) = (-3+1,\ 4+0,\ 1-5) = (-2,\ 4,\ -4)$
+$(\vec{u}, \vec{vw}) = (2\cdot-2+ 1\cdot4+\ 0\cdot-4) = -4+4+0 = 0$
+
+$0 = 0$
+
+### Asociativa
+
+$((\lambda \vec{u}), \vec{v}) = \lambda(\vec{u},\vec{v})$
+
+$(\lambda\vec{u}) =  (2\lambda,\lambda, 0) $
+$((\lambda \vec{u}), \vec{v}) = (\lambda2\cdot-3 + \lambda\cdot4+  0\cdot1) = (-6\lambda + 4\lambda + 0) = -2\lambda$
+
+$\lambda(\vec{u}, \vec{v}) =(-6\lambda + 4\lambda+0) = -2\lambda$
+
+## Pregunta 9
+Demostrad que si $u\ne0$, entonces $(u, u)$ > 0, donde $u = (u_{1}, . . . , u_{n})$
+$\vec{u} = (u_{1}, u_{2})$
+
+$(\vec{u},\vec{u}) = (u_{1}\ ^2+u_{2}\ ^2)$
+
+El cuadrado de cualquier número siempre es positivo, por ello y debido a que estamos sumando cuadrados podemos afirmar que si existe almenos una componente de $\vec{u}$ diferente de 0 su producto escalar será > 0
+
+## Pregunta 10
+Dado u = (1, 2, −1),
+• Calculad su norma
+$||u|| = \sqrt{1^{2}+2^{2}+-1^{2}} = \sqrt{6}$
+• Comprobad que
+$||2u|| = 2||u||$
+$2u = 2(1, 2, -1) = (2, 4, -2)$
+$||2u|| = \sqrt{2^2+4^2+(-2^2)} = \sqrt{4+16+4} = \sqrt{24} = \sqrt{6\cdot4} = \sqrt{6\cdot2^2} = 2\sqrt{6}$
+$2||u|| = 2\sqrt{6}$
+
+• Comprobad que
+$||(−3)u|| = | − 3| · ||u|| = 3||u||$
+
+$||(-3)u|| = \sqrt{-3^2+(-6^2)+3^2)} = \sqrt{9+36+9} = \sqrt{54} = \sqrt{2\cdot3\cdot3^2} = 3\sqrt{6} $
+$3||u|| = 3\sqrt{6}$
+$|-3|\cdot||u|| = 3\sqrt{6}$
+
+• Comprobad que si se divide por su norma se obtiene otro vector que es unitario
+$(-||u||\cdot \vec{u}) = (\frac{1}{\sqrt{6}}, 2\cdot\frac{1}{\sqrt{6}}, -\frac{1}{\sqrt{6}})$
+$||\ ||u||\cdot \vec{u}|| = \sqrt{(\frac{1}{\sqrt{6}})^2+(2\cdot\frac{1}{\sqrt{6}})^2+(-\frac{1}{\sqrt{6}})^2} = \sqrt{0.1666667+0.6666667+0.1666667}= 1$
+
+• Encuentra otro vector de la misma dirección y sentido, pero con norma 3
+
+\vec{x} = (2,2,-1)
+$||x|| = \sqrt{2^{2}+2^{2}+(-1)^{2}} =  \sqrt{9} = 3$
+
+## Pregunta 11
+Demostrad que cualquier vector u, al ser dividido por su norma, es unitario.
+
+$\vec{u} = (2,2,-1)$
+$||u|| = \sqrt{2^{2}+2^{2}+(-1)^{2}} =  \sqrt{9} = 3$
+$||(u\cdot\frac{1}{||u||})|| = \sqrt{2\cdot(\frac{2}{3})^2+(\frac{-1}{3})^2} = \sqrt{2\cdot(\frac{2^2}{3^2})+(\frac{-1^2}{3^2})} = \sqrt{2\cdot\frac{4}{9}+\frac{1}{9}} = \sqrt{\frac{8}{9}+\frac{1}{9}}=\sqrt{1}=1 $
+## Pregunta 12
+Dados los puntos A = (1, 2, 3), B = (0, −1, 2) y C = (−2, −7, 0)
+• Calcula la distancia entre A y B
+$d(A, B) = ||\vec{AB}|| = \sqrt{(\vec{AB},\vec{AB})}$
+$\vec{AB} = (0-1,-1-2, 2-3) = (-1, -3, -1)$
+$||\vec{AB}|| = \sqrt{-1^2+(-3)^2+(-1^2)} = \sqrt{1+9+1} = \sqrt{11}$
+
+• Calcula la distancia entre A y C
+$d(A, C) = ||\vec{AC}|| = \sqrt{(\vec{AC},\vec{AC})}$
+$\vec{AC} = (-2-1,-7-2, 0-3) = (-3, -9, -3)$
+$||\vec{AC}|| = \sqrt{-3^2+(-9)^2+(-3^2)} = \sqrt{2\cdot(-3)^2+(-9)^2} = \sqrt{18+81} = \sqrt{99} = \sqrt{3^2\cdot11} = 3\sqrt{11}$
+
+• Calcula la distancia entre B y C
+$d(B, C) = ||\vec{BC}|| = \sqrt{(\vec{BC},\vec{BC})}$
+$\vec{BC} = (-2-0,-7+1, 0-2) = (-2, -6, -2)$
+$||\vec{BC}|| = \sqrt{-2^2+(-6)^2+(-2^2)} = \sqrt{2\cdot(-2)^2+(-6)^2} = \sqrt{8+36} = \sqrt{44} = \sqrt{2^2\cdot11} = 2\sqrt{11}$
+
+
+## Pregunta 13
+Dados los puntos A = (1, 2, 3), B = (0, −1, 2) y C = (−2, −7, 0),
+• Encuentra el ángulo que forman los vectores AB y AC
+
+$\vec{AB} = (0-1, -1-2, 2-3) = (-1, -3, -1)$ 
+$\vec{AC} = (-2-1, -7-2, 0-3) = (-3, -9, -3)$
+
+$\cos\alpha = \frac{(AB, AC)}{||AB||\cdot||AC||}$
+$(AB,AC) = (-1\cdot-3)+(-3\cdot-9)+(-1\cdot-3)= 2\cdot(-1\cdot-3)+(-3\cdot-9) = 2\cdot3+27 = 33$
+$||AB|| = \sqrt{2\cdot(-1)^2+(-3)^2} = \sqrt{2+9} = \sqrt{11}$
+$||AC|| = \sqrt{2\cdot(-3)^2+(-9)^2} = \sqrt{18+81} = \sqrt{99} = \sqrt{3^2\cdot11} = 3\sqrt{11}$
+$\cos\alpha = \frac{33}{3\sqrt{11}\cdot\sqrt{11}} = \frac{33}{3\cdot\sqrt{11}^2}  = \frac{33}{3*11} = \frac{33}{33} = 1$ 
+
+$\alpha = \arccos(1) = 0 $
+
+• Calcula el producto vectorial de los vectores CB y AC
+$\vec{CB} = (0+2, -1+7, 2-0) = (2,6,2)$
+$\vec{AC} = (-3, -9, -3)$
+$$\vec{CB}\land\vec{AC} = \begin{vmatrix}
+\vec{i}&\vec{j}&\vec{k} \\
+2 & 6 & 2 \\
+-3 & -9 & -3
+\end{vmatrix} = (-18 + 18, -6+6, -18+18) = (0, 0, 0)$$
+
+## Pregunta 14
+¿Para qué valores de a son ortogonales los vectores (a, −a − 8, a, a) y (a, 1, −2, 0)?
+$\vec{A} = (a, −a−8, a, a)$
+$\vec{B} = (a, 1, −2, 0)$
+$(A, B) = (a^2-3a-8) = 0$
+
+$$
+a = \frac{3\pm\sqrt{-3^2-(4\cdot-8)}}{2} = \frac{3\pm\sqrt{41}}{2} = \left \{ \begin{matrix}
+\frac{3+\sqrt{41}}{2} = 6.201562\\
+\frac{3-\sqrt{41}}{2} = -0.2015621\end{matrix} \right .$$

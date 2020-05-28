@@ -16,8 +16,7 @@ $$
 A_{1} = \begin{pmatrix}1 & 4 & 6\\2 & -1 & 3 \\ 3 & 2 & 5\end{pmatrix}\\
 $$
 $$
-U = A \tilde{}F_{2} - 2F_{1}\begin{pmatrix}1 & 4 & 6\\0 & -9 & -9 \\ 3 & 2 & 5\end{pmatrix} \tilde{} F_{3} - 3F_{1}\begin{pmatrix}1 & 4 & 6\\0 & -9 & -9 \\ 0 & -10 & -13\end{pmatrix} \tilde{} -\frac{1}{9}F_{2} = \begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & -10 & -13\end{pmatrix} \tilde{} F_{3} + 10F_{2} \\
-\begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & 0 & -3\end{pmatrix} 
+U = A \tilde{}F_{2} - 2F_{1}\begin{pmatrix}1 & 4 & 6\\0 & -9 & -9 \\ 3 & 2 & 5\end{pmatrix} \tilde{} F_{3} - 3F_{1}\begin{pmatrix}1 & 4 & 6\\0 & -9 & -9 \\ 0 & -10 & -13\end{pmatrix} \tilde{} -\frac{1}{9}F_{2} =\\= \begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & -10 & -13\end{pmatrix} \tilde{} F_{3} + 10F_{2} \begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & 0 & -3\end{pmatrix} 
 \tilde{}-\frac{1}{3}F_{3} \begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & 0 & 1\end{pmatrix}
 $$
 
@@ -26,18 +25,12 @@ U = F_{3} (-\frac{1}{3}) \cdot F_{32}(10) \cdot F_{2}(-\frac{1}{9}) \cdot F_{31}
 $$
 
 $$
-A_{1} = F_{21}(2) \cdot F_{31}(3) \cdot F_{2}(-9)\cdot F_{32}(-10) \cdot F_{3}(-3)
+L = F_{21}(2) \cdot F_{31}(3) \cdot F_{2}(-9)\cdot F_{32}(-10) \cdot F_{3}(-3)
 $$
 
 $$
-U = \begin{pmatrix}1 & 0 & 0\\2 & 1 & 0 \\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 3 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & -9 & 0 \\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & -10 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & 0 & -3\end{pmatrix} \cdot A =\\= \begin{pmatrix}1 & 0 & 0\\2 & 1 & 0 \\ 3 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & -9 & 0 \\ 0 & -10 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 &1 & 0 \\ 0 & 0 & -3\end{pmatrix} = \begin{pmatrix}1 & 0 & 0\\2 & -9 & 0 \\ 3 & -10 & 1\end{pmatrix} \cdot\begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & 0 & -3\end{pmatrix} \cdot A= \begin{pmatrix}1 & 0 & 0\\2 & -9 & 0 \\ 3 & -10 & -3\end{pmatrix} \cdot A
+L = \begin{pmatrix}1 & 0 & 0\\2 & 1 & 0 \\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 3 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & -9 & 0 \\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & -10 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & 0 & -3\end{pmatrix} \\= \begin{pmatrix}1 & 0 & 0\\2 & 1 & 0 \\ 3 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & -9 & 0 \\ 0 & -10 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 &1 & 0 \\ 0 & 0 & -3\end{pmatrix} = \\=\begin{pmatrix}1 & 0 & 0\\2 & -9 & 0 \\ 3 & -10 & 1\end{pmatrix} \cdot\begin{pmatrix}1 & 0 & 0\\0 & 1 & 0 \\ 0 & 0 & -3\end{pmatrix} = \begin{pmatrix}1 & 0 & 0\\2 & -9 & 0 \\ 3 & -10 & -3\end{pmatrix}
 $$
-
-$$
-L = \begin{pmatrix}1 & 0 & 0\\2 & -9 & 0 \\ 3 & -10 & -3\end{pmatrix}\\
-U = \begin{pmatrix}1 & 4 & 6\\0 & 1 & 1 \\ 0 & 0 & 1\end{pmatrix}\\
-$$
-
 
 A2)
 $$
@@ -51,7 +44,7 @@ U = F_{3}(-1)\cdot F_{32}(16)\cdot F_{2}(-\frac{1}{2})\cdot F_{31}(-7)\cdot F_{2
 L = F_{21}(2)\cdot F_{31}(7)\cdot F_{2}(-2)\cdot F_{32}(-16)\cdot F_3(-1) = \\
 = \begin{pmatrix}1 & 0 &0 \\2 & 1 & 0\\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 7 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & -2 & 0\\ 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 0 & -16 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 0 & 0 & -1\end{pmatrix} = \\
 \begin{pmatrix}1 & 0 &0 \\2 & 1 & 0\\ 7 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & -2 & 0\\ 0 & -16 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 0 & 0 & -1\end{pmatrix} =\\
-\begin{pmatrix}1 & 0 &0 \\2 & -2 & 0\\ 7 & -16 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 0 & 0 & -1\end{pmatrix} = \begin{pmatrix}1 & 0 &0 \\2 & -2 & 0\\ 7 & -16 & -1\end{pmatrix}
+=\begin{pmatrix}1 & 0 &0 \\2 & -2 & 0\\ 7 & -16 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 &0 \\0 & 1 & 0\\ 0 & 0 & -1\end{pmatrix} = \begin{pmatrix}1 & 0 &0 \\2 & -2 & 0\\ 7 & -16 & -1\end{pmatrix}
 $$
 
 A3)
@@ -61,7 +54,7 @@ A_3 = \begin{pmatrix}0 & 0 & 5\\-1 & 4 & 1\\2 & -3 & 2\end{pmatrix}
 $$
 
 $$ 
-U = A \tilde{} F_3 - F_1 \begin{pmatrix}2 & -3 & 2\\-1 & 4 & 1\\0 & 0 & 5\end{pmatrix} \tilde{fd }\frac{1}{2}F_1 \begin{pmatrix}1 & \frac{-3}{2} & 1\\-1 & 4 & 1\\0 & 0 & 5\end{pmatrix} \tilde{}F_2+1F_1 \begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & \frac{5}{2} & 2\\0 & 0 & 5\end{pmatrix}\tilde{}\frac{2}{5}F_2\begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & 1 & \frac{4}{5}\\0 & 0 & 5\end{pmatrix}\tilde{}\frac{1}{5}F_3\\\begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & 1 & \frac{4}{5}\\0 & 0 & 1\end{pmatrix}
+U = A \tilde{} F_3 - F_1 \begin{pmatrix}2 & -3 & 2\\-1 & 4 & 1\\0 & 0 & 5\end{pmatrix} \tilde{}\frac{1}{2}F_1 \begin{pmatrix}1 & \frac{-3}{2} & 1\\-1 & 4 & 1\\0 & 0 & 5\end{pmatrix} \tilde{}F_2+1F_1 \begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & \frac{5}{2} & 2\\0 & 0 & 5\end{pmatrix}\tilde{}\frac{2}{5}F_2\\\begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & 1 & \frac{4}{5}\\0 & 0 & 5\end{pmatrix}\tilde{}\frac{1}{5}F_3\begin{pmatrix}1 & \frac{-3}{2} & 1\\0 & 1 & \frac{4}{5}\\0 & 0 & 1\end{pmatrix}
 $$
 
 $$
@@ -76,13 +69,86 @@ $$
 
 $$
 L = F_1(2)\cdot F_{21}(-1)\cdot F_2(\frac{5}{2})\cdot F_{3}(5) =\\
-= \begin{pmatrix}2 & 0 & 0\\0 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\-1 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & \frac{5}{2} & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0\\0 & 0 & 5\end{pmatrix} = \begin{pmatrix}2 & -0 & 0\\-1 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & \frac{5}{2} & 0\\0 & 0 & 5\end{pmatrix} = \begin{pmatrix}2 & 0 & 0\\-1 & \frac{5}{2} & 0\\0 & 0 & 5\end{pmatrix}
+= \begin{pmatrix}2 & 0 & 0\\0 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\-1 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & \frac{5}{2} & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & 1 & 0\\0 & 0 & 5\end{pmatrix} = \begin{pmatrix}2 & -0 & 0\\-1 & 1 & 0\\0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\0 & \frac{5}{2} & 0\\0 & 0 & 5\end{pmatrix} = \begin{pmatrix}2 & 0 & 0\\-1 & \frac{5}{2} & 0\\0 & 0 & 5\end{pmatrix}\\ \tilde{}F_3-\frac{2}{7}F_2\begin{pmatrix}\end{pmatrix}\tilde{}\frac{1}{21}F_2
 $$
 
 A4)
+$$
+A_4 = \begin{pmatrix}3&9&-2 \\ 6&-3&8  \\ 4&6&5\end{pmatrix}
+$$
+$$
+U = A \tilde{} F_2-2F_1 \begin{pmatrix}3&9&-2 \\0&-21&12\\4&6&5\end{pmatrix}\tilde{}\frac{1}{3}F_1\begin{pmatrix}1&3&-\frac{2}{3}\\0&-21&12\\4&6&5\end{pmatrix}\tilde{}F_3-4F_1\begin{pmatrix}1&3&-\frac{2}{3}\\0&-21&12\\0&-6&\frac{23}{3}\end{pmatrix}\\
+\tilde{}F_3 - \frac{2}{7}F_2\begin{pmatrix}1&3&-\frac{2}{3}\\0&-21&12\\0&0&\frac{89}{21}\end{pmatrix}\tilde{}-\frac{1}{21}F_2\begin{pmatrix}1&3&-\frac{2}{3}\\0&1&-\frac{4}{7}\\0&0&\frac{89}{21}\end{pmatrix}\tilde{}\frac{21}{89}F_3\begin{pmatrix}1&3&-\frac{2}{3}\\0&1&-\frac{4}{7}\\0&0&1\end{pmatrix}
+$$
 
+$$
+U = F_3(\frac{21}{89})\cdot F_2(-\frac{1}{21})\cdot F_{32}(-\frac{2}{7})\cdot F_{31}(-4)\cdot F_1(\frac{1}{3})\cdot F_{21}(-2) \cdot A 
+$$
+$$
+L = F_{21}(2)\cdot F_1(3)\cdot F_{31}(4)\cdot F_{32}(\frac{2}{7})\cdot F_2(-21)\cdot F_3(\frac{89}{21}) =\\=\begin{pmatrix}1&0&0\\2&1&0\\0&0&1\end{pmatrix}\cdot\begin{pmatrix}3&0&0\\0&1&0\\0&0&1\end{pmatrix}\cdot\begin{pmatrix}1&0&0\\0&1&0\\4&0&1\end{pmatrix}\cdot \begin{pmatrix}1&0&0\\0&1&0\\0&\frac{2}{7}&1\end{pmatrix}\cdot \begin{pmatrix}1&0&0\\0&-21&0\\0&0&1\end{pmatrix}\cdot \begin{pmatrix}1&0&0\\0&1&0\\0&0&\frac{89}{21}\end{pmatrix} = \\
+=\begin{pmatrix}3&0&0\\6&1&0\\0&0&1\end{pmatrix}\cdot \begin{pmatrix}1&0&0\\0&1&0\\4&\frac{2}{7}&1\end{pmatrix}\cdot \begin{pmatrix}1&0&0\\0&-21&0\\0&0&\frac{89}{21}\end{pmatrix} = \begin{pmatrix}3&0&0\\6&-21&0\\4&-6&\frac{89}{21}\end{pmatrix}
+$$
+2.
+$$
+PAX = PB\\
+LUX = PB\\
+UX = Y\\
+LY = PB
+$$
+A_1)
+$$
+AX = B\\
+LUX = B\\
+UX = Y\\
+LY = B\\ 
+\begin{pmatrix}1&0&0\\2&-9&0\\3&-10&-3\end{pmatrix} \cdot \begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix} = \begin{pmatrix}-1\\7\\2\end{pmatrix}
+$$
+$$
+y_1 = -1;\\
+2y_1-9y_2 = 7\\
+-2 -9y_2 = 7\\
+-9y_2 = 9\\
+y_2 = \frac{9}{-9} = -1;\\
+3y_1-10y_2-3y_3=2\\
+-3+10-3y_3 = 2\\
+-3y_3 = -5\\
+y_3 = \frac{-5}{-3} = \frac{5}{3};
+$$
+$$
+UX = B = \begin{pmatrix}1&4&6\\0&1&1\\0&0&1\end{pmatrix}\cdot\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix} =  \begin{pmatrix}-1\\-1\\\frac{5}{3}\end{pmatrix}\\
+x_3 = \frac{5}{3};\\
+x_2 + x_3 = -1\\
+x_2 = -1 - \frac{5}{3}= -\frac{8}{3};\\
+x_1 + 4(-\frac{8}{3})+ 6(\frac{5}{3}) = -1\\
+x_1 = -1 + \frac{32}{3} - 10 = -\frac{1}{3}
+$$
+A2)
+$$
+AX = B\\
+LUX = B\\
+UX = Y\\
+LY = B 
+$$
+$B = \begin{pmatrix}6\\1\\1\end{pmatrix}$
+$$
+\begin{pmatrix}2&0&0\\1&1&0\\7&-9&-1\end{pmatrix}\cdot \begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix}=\begin{pmatrix}6\\1\\1\end{pmatrix}\\
+y_1 = \frac{6}{2}=3;\\
+y_1 + y_2 = 1\\
+3 + y_2 = 1\\
+y_2 = 1-3 = -2;\\
+7y_1 - 9y_2 - 6y_3 = 1\\
+21 - 18 - y_3 = 1\\
+-y_3 = 1 - 21 + 18\\
+y_3 = \frac{-38}{-1} = 38;
+$$
 
-
+A3)
+$$
+PAX = PB\\
+LUX = PB\\
+UX = Y\\
+LY = PB
+$$
 
 ```{r}
 U = rbind(c(1,-3/2,1), c(0,1,4/5), c(0, 0, 1))

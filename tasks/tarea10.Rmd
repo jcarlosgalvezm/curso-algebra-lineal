@@ -1,0 +1,260 @@
+---
+title: "Tarea10"
+author: "Carlos Gálvez"
+date: "4/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pracma)
+library(polynom)
+```
+
+## Ejercicio 1
+
+Halla el cociente y el resto de la división de $p(x) = (x+1)^7$ entre $q(x) = x^2+x+1$.
+
+
+Aplicando el teorema del binomio de Newton a $p(x) = (x+1)^7$ obtenemos que: 
+$p(x) = (x+1)^7 = x^7+7x^6+21x^5+35x^4+35x^3+21x^2+7x+1$
+
+Si realizamos la división obtenemos que:
+
+$ \frac{p(x)}{q(x)} = \frac{x^7+7x^6+21x^5+35x^4+35x^3+21x^2+7x+1}{x^2+x+1} = x^5 + 6x^4 + 14x^3 + 15x^2 +6x  $
+
+$ p(x)\mod q(x)  = {x^7+7x^6+21x^5+35x^4+35x^3+21x^2+7x+1}\mod{x^2+x+1} = x+1$ 
+
+## Ejercicio 2
+
+Halla el módulo y el árgumento del número complejo $\frac{(1+i)^7}{1-i}$.
+
+
+$\frac{(1+i)^7}{1-i} = \frac{1+i^7·(1+i) }{(1-i)(1+i)} = \frac{1+i^8}{1+i-i-i^2} = \frac{1+i^8}{1-i^2} = \frac{(1+i)^8}{1+1} = \frac{1+i^8}{2}$
+
+Aplicando el teorema del binomio de Newton:
+
+$z = \frac{(1+i)^8}{2} = \frac{1^8+8\cdot1^7(i)+28\cdot1^6(-1)+56\cdot1^5(-i)+70\cdot1^4(1)+56\cdot1^3(i)+28\cdot1^2(-1)+8\cdot1^1(-i)+1^0(1)}{2} = \frac{8(i-i)+56(-i+i)+16}{2} = \frac{8(0)+56(0)+16}{2} = \frac{16}{2} = 8$
+  
+De manera que:
+$|z| = \sqrt{z*z} = \sqrt{8*8} = \sqrt{8^2} = 8$
+$arg(z) = arctan(\frac{b}{a}) = arctan(\frac{0}{8}) = 0$
+
+  
+## Ejercicio 3
+
+
+
+Halla el valor de la matriz $X$ para que se verifique
+
+
+
+$$A\cdot X \cdot A^t = \sqrt{5} \cdot A$$
+
+donde $A$ es la matriz
+
+
+
+$$A =\left(\begin{matrix}1&1&1\\0&-1&-1\\-1&0&1\end{matrix}\right)$$
+
+$$A\cdot X \cdot A^t \cdot (A^t)^{-1} = \sqrt{5} \cdot A \cdot (A^t)^{-1}$$
+$$A\cdot X \cdot I_{3} = \sqrt{5} \cdot A \cdot (A^t)^{-1}$$
+$$A\cdot X = \sqrt{5} \cdot A \cdot (A^t)^{-1} = B$$
+$$A\cdot A^{-1} X = B \cdot A^{-1}$$
+$$I_{3} \cdot X = B \cdot A^{-1}$$
+$$X = B \cdot A^{-1} = \sqrt{5} \cdot A \cdot (A^t)^{-1} \cdot A^{-1}  $$
+
+$$A^{t} = \left(\begin{matrix}1&0&-1\\1&-1&0\\1&-1&1\end{matrix}\right) $$
+
+$$|A^{t}| = (-1+0+1)-(1+0+0) = -1$$
+
+$$AdjA = \left(\begin{matrix}-1&-1&0\\1&0&1\\-1&1&-1\end{matrix}\right) $$
+
+
+$$(A^t)^{-1} =  \frac{1}{|A^t|}\cdot AdjA = \frac{1}{-1} \cdot \left(\begin{matrix}-1&-1&0\\1&0&1\\-1&1&-1\end{matrix}\right) = -1 \cdot \left(\begin{matrix}-1&-1&0\\1&0&1\\-1&1&-1\end{matrix}\right) = \left(\begin{matrix}1&1&0\\-1&0&-1\\1&-1&1\end{matrix}\right)$$
+
+$$|A| = (-1+1+0) - (-1+0+0) = 0+1 = 1 $$
+
+$$A^{t} = \left(\begin{matrix}1&0&-1\\1&-1&0\\1&-1&1\end{matrix}\right) $$
+$$AdjA^{t} = \left(\begin{matrix}-1&1&0\\-1&2&-1\\-1&-1&-1\end{matrix}\right) $$
+
+
+$$A^{-1} =  \frac{1}{|A|}\cdot AdjA^{t} = \frac{1}{1}\cdot AdjA^{t} = 1 \cdot \left(\begin{matrix}-1&1&0\\-1&2&-1\\-1&-1&-1\end{matrix}\right) = \left(\begin{matrix}-1&1&0\\-1&2&-1\\-1&-1&-1\end{matrix}\right)$$
+
+$$ B = \sqrt{5} \cdot A \cdot (A^t)^{-1} = \sqrt{5} \cdot \left(\begin{matrix}1&1&1\\0&-1&-1\\-1&0&1\end{matrix}\right) \cdot \left(\begin{matrix}1&1&0\\-1&0&-1\\1&-1&1\end{matrix}\right) = $$
+$$ = \left(\begin{matrix}\sqrt{5}&\sqrt{5}&\sqrt{5}\\0&-\sqrt{5}&-\sqrt{5}\\-\sqrt{5}&0&\sqrt{5}\end{matrix}\right) \cdot \left(\begin{matrix}1&1&0\\-1&0&-1\\1&-1&1\end{matrix}\right) = \left(\begin{matrix}\sqrt{5}&0&0\\0&\sqrt{5}&0\\0&0&\sqrt{5}\end{matrix}\right)$$
+
+$$X = B \cdot A^{-1} = \left(\begin{matrix}\sqrt{5}&0&0\\0&\sqrt{5}&0\\0&0&\sqrt{5}\end{matrix}\right) \cdot \left(\begin{matrix}-1&1&0\\-1&2&-1\\-1&-1&-1\end{matrix}\right) = $$
+$$ = \left(\begin{matrix}\sqrt{5}&0&0\\0&\sqrt{5}&0\\0&0&\sqrt{5}\end{matrix}\right) \cdot \left(\begin{matrix}-1&1&0\\-1&2&-1\\-1&-1&-1\end{matrix}\right) = \left(\begin{matrix}-\sqrt{5}&\sqrt{5}&0\\-\sqrt{5}&2\sqrt{5}&-\sqrt{5}\\-\sqrt{5}&-\sqrt{5}&-\sqrt{5}\end{matrix}\right) $$
+
+
+## Ejercicio 4 
+
+
+
+Resuelve aplicando el método de Gauss y clasifica según corresponda el sistema de ecuaciones lineal siguiente:
+
+
+
+$$
+\left\{
+\begin{matrix}
+x &-& y&+& z&+& t&=&4\\
+2x&+& y&-&3z&+& t&=&4\\
+x &-&2y&+&2z&-& t&=&3\\
+x &-&3y&+&3z&-&3t&=&2
+\end{matrix}
+\right.
+$$
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+2 & 1&-3 &1&|&4\\
+
+1 &-2&2&-1&|&3\\
+
+1 &-3&3&-3&|&2
+
+\end{pmatrix}
+
+\rightarrow^{F_{2} - 2 \cdot F_{1}} $$
+
+
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 3&-5 &-1&|&-4\\
+
+1 &-2&2&-1&|&3\\
+
+1 &-3&3&-3&|&2
+
+\end{pmatrix} \rightarrow F_{2}-F_{1}$$
+
+
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 3&-5 &-1&|&-4\\
+
+1 &-2&2&-1&|&3\\
+
+1 &-3&3&-3&|&2
+
+\end{pmatrix} \rightarrow F_{3}-F_{1}$$
+
+
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 3&-5 &-1&|&-4\\
+
+0 &-1&1&2&|&3\\
+
+1 &-3&3&-3&|&2
+
+\end{pmatrix} \rightarrow F_{4}-F_{1}$$
+
+
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 3&-5 &-1&|&-4\\
+
+0 &-1&1&2&|&-1\\
+
+1 &-3&3&-3&|&2
+
+\end{pmatrix} \rightarrow F_{4}-F{1}$$
+
+
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 3&-5 &-1&|&-4\\
+
+0 &-1&1&2&|&-1\\
+
+0 &-2&2&-4&|&-2
+
+\end{pmatrix} \rightarrow F_{2}-3F_{3}$$
+
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 0&-8 &-7&|&-1\\
+
+0 &-1&1&2&|&-1\\
+
+0 &-2&2&-4&|&-2
+
+\end{pmatrix} \rightarrow F_{4} + 2F_{3} $$
+
+
+  Q1
+$$
+
+\begin{pmatrix}
+
+1 &-1&1& 1&|&4\\
+
+0 & 0&-8 &-7&|&-1\\
+
+0 &-1&1&2&|&-1\\
+
+0 &0&4&0&|&-2
+
+\end{pmatrix}$$
+
+## Ejercicio 5
+
+
+
+Considera el sistema de ecuaciones lineal
+
+
+
+$$
+\left\{
+\begin{matrix}
+ax&+&y&+&z& =& (a-1)(a+2)\\
+x&+&ay&+&z& =& (a-1)^2(a+2)\\
+x&+&y&+&az& =& (a-1)^3(a+2)
+\end{matrix}
+\right.
+$$
+
+
+
+1. Indicar para qué valores del parámetro $a\in\mathbb{R}$ el sistema es compatible determinado, indeterminado o bien incompatible.
+
+2. Resolver el sistema cuando $a=1$.
+
+3. Resolver el sistema cuando $a=-2$.
