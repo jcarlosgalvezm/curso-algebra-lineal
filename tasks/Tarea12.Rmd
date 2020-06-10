@@ -1,0 +1,132 @@
+---
+title: "Tarea12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+use_python('~/anaconda3/envs/py38/bin/python')
+```
+
+```{python}
+import numpy as np
+
+def print_vector_info(v):
+    x, y = v
+    print(f'Componentes: {v}')
+    print("Módulo: {}".format(np.linalg.norm(v)))
+    print("Sentido: {}".format(round(np.degrees(np.arctan2(y, x)), 2)))
+    print('-'*10)
+```
+
+1.
+```{python}
+# 1.
+A = np.array([0,0])
+points = [(4,2), (2,-6), (-4,3), (0,5),(-4,0), (-3,5), (0,-3), (4,-3),
+    (2, 5),(-7,-3)]
+    
+
+for i, point in enumerate(points, 1):
+    AB = np.array(point) - A
+    print(f'Vector {i}')
+    print_vector_info(AB)
+    
+```
+
+2.
+```{python}
+points = (
+    [(1,2), (2,5)], 
+    [(-8,2) (-5,-6)], 
+    [(2,-2), (1, -5)]
+    )
+for i, points_pair in enumerate(points, 1):
+    a, b = points_pair
+    AB = np.array(b) - np.array(a)
+    print(f'Vector {i}')
+    print_vector_info(AB)
+```
+
+3.
+Ver imagen adjunta
+
+4.
+$$
+\vec{u}+\vec{v}-(\vec{w}+\vec{z})\\
+\vec{u}-\vec{z}+\vec{w}+\vec{v}\\
+\vec{u}+\vec{v}+\vec{z}\\
+\vec{v}+\vec{w}+\vec{z}-\vec{u}\\
+\vec{u}+\vec{z}-\vec{w}-\vec{v}\\
+\vec{u}+\vec{z}+\vec{v}+\vec{w}
+$$
+5.
+
+Fig.1
+$$
+\vec{u}-\vec{w}+\vec{r}+\vec{o}+\vec{z}+\vec{v}-\vec{r}+\vec{n}
+$$
+Fig2.
+$$
+\vec{r}+\vec{w}+\vec{z}-\vec{u}+\vec{v}-\vec{z}
+$$
+
+6.
+```{python}
+A = np.array([1,2,3])
+B = np.array([0,-1,2])
+C = np.array([-2,7,0])
+```
+Método 1: Formar vectores y comprovar si son paralelos viendo si hay proporcionalidad entre sus cordenandas. En caso de ser paralelos significa que los puntos están alineados.
+```{python}
+AB = B-A
+AC = C-A
+AB[0]/AC[0] == AB[1]/AC[1] == AB[2]/AC[2]
+```
+Como se puede ver no estan alineados.
+
+Método 2: Formar vectores y comprovar que el determinate es 0 y el rango es 2 
+```{python}
+M = np.array([(AB), (AC)])
+M1 = np.array([(AB[:2]), (AC[:2])])
+np.linalg.det(M1) == 0
+np.linalg.matrix_rank(M) == 2
+```
+Como se puede ver no estan alineados ya que el determinante es diferente de 0.
+
+7.
+```{python}
+A = np.array([2,0,-4])
+B = np.array([-4,4,2])
+P = (A+B)/2
+P
+```
+
+8.
+Podemos calcular los puntos a partir de la norma y el vector unitario de AB
+```{python}
+a = np.array([2,0,-4])
+b = np.array([-4,4,2])
+AB = b-a
+norm_AB = np.linalg.norm(AB)
+AB_unit = AB/norm_AB
+AP = (norm_AB/3)*AB_unit
+p1 = np.round(a+AP, 4)
+p2 = np.round(p1+AP, 4)
+print((p1, p2))
+```
+
+También podriamos hayar los puntos a partir de una razón tal y como se ha hecho en el ejercicio anterior
+```{python}
+r1 = 1/2
+r2 = 2
+c = np.array([(a[0]+(r1*b[0]))/(1+r1), (a[1]+(r1*b[1]))/(1+r1),(a[2]+(r1*b[2]))/(1+r1)])
+d = np.array([(a[0]+(r2*b[0]))/(1+r2), (a[1]+(r2*b[1]))/(1+r2),(a[2]+(r2*b[2]))/(1+r2)])
+print((c,d))
+```
+
+9.
+
+Ver imagen adjunta
+
