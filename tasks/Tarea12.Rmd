@@ -129,3 +129,575 @@ print((c,d))
 9.
 ![](https://raw.githubusercontent.com/jcarlosgalvezm/curso-algebra-lineal/master/tasks/Tarea12-9.png)
 
+10.
+```{python}
+u = (1,2,1)
+v = (1,2,2)
+w = (0,0,3)
+z = (-2,4,3)
+
+M = np.array([v, w, z]).T
+MA = np.c_[M, u]
+M_rank = np.linalg.matrix_rank(M)
+MA_rank = np.linalg.matrix_rank(MA)
+M_rank == MA_rank
+M_rank == 3
+np.linalg.det(M)
+x = np.linalg.solve(M, u)
+x
+```
+Es combinación lineal
+
+11.
+```{python}
+u = (-3,-2,4)
+x = (1,2,1)
+y = (-1,0,3)
+z = (2,1,-4)
+
+M = np.array([x, y, z]).T
+MA = np.c_[M, u]
+M_rank = np.linalg.matrix_rank(M)
+MA_rank = np.linalg.matrix_rank(MA)
+M_rank == MA_rank
+
+```
+El rango de la matriz es distinto del de su ampliada por lo tanto $\vec{u}$ no es combinación lineal de $\vec{x},\vec{y},\vec{z}$.
+
+```{python}
+from sympy import Matrix, linsolve
+M = np.array([x,y]).T
+MA = np.c_[M, z]
+M_rank = np.linalg.matrix_rank(M)
+MA_rank = np.linalg.matrix_rank(MA)
+M_rank == MA_rank
+M_rank == 3
+linsolve(Matrix(MA))
+```
+$\vec{z}$ es combinación lineal de $\vec{x}$ e $\vec{y}$
+
+12.
+```{python}
+P = np.array([3, 0, 0])
+Q = np.array([0, 2, 0])
+R = np.array([0, 0, -4])
+S = np.array([3, -2, 4])
+
+PQ = Q-P
+RS = S-R
+OP = P
+OR = R
+
+PQ_norm = np.linalg.norm(PQ)
+RS_norm = np.linalg.norm(RS)
+OP_norm = np.linalg.norm(P)
+OR_norm = np.linalg.norm(R)
+
+PQ_norm, RS_norm, OP_norm, OR_norm
+
+```
+La distancia entre los puntos P y Q, R y S, O y P y O y R coincide con las normas calculadas anteriormente.
+
+```{python}
+PQ_unit = PQ/PQ_norm
+RS_unit = RS/RS_norm
+OP_norm = OP/OP_norm
+OR_norm = OR/OR_norm
+
+PQ_unit, RS_unit, OP_norm, OR_norm
+```
+```{python}
+M = np.array([OP, OR]).T
+MA = np.c_[M, PQ]
+np.linalg.matrix_rank(M) == np.linalg.matrix_rank(MA)
+```
+Los rangos son diferentes por lo tanto se trata de un sistema incompatible y podemos decir que $\vec{PQ}$ no es combinación lineal de $\vec{OR}$ y $\vec{OP}$
+
+```{python}
+PS = S-P
+M = np.array([OP, OR, PS]).T
+MA = np.c_[M, PQ]
+np.linalg.matrix_rank(M) == np.linalg.matrix_rank(MA)
+np.linalg.matrix_rank(M) == 3
+np.linalg.solve(M, PQ)
+```
+Es combinacion lineal
+
+13.
+```{python}
+from sympy import Matrix, linsolve, symbols
+v1 = np.array([1, 2, -5, 3])
+v2 = np.array([2, -1, 4, 7])
+a,b = symbols('a b')
+x = np.array([a, b, -37, -3])
+V = np.array([v1, v2]).T
+VX = Matrix(np.c_[V, x])
+np.linalg.matrix_rank(V) == VX.rank()
+VX1 = Matrix([
+[ 1,  2,   a],
+[ 2, -1,   b],
+[-5,  4, -37]])
+VX2 = Matrix([
+[ 2, -1,   b],
+[-5,  4, -37],
+[ 3,  7,  -3]])
+eq1 = VX1.det()
+eq2 = VX2.det()
+a, b = tuple(linsolve([eq1, eq2], (a,b)))[0]
+x = np.array([a, b, -37, -3])
+x
+VX = Matrix(np.c_[V, x])
+linsolve(VX)
+```
+([-5/47, 620/47, -37, -3) es combinación lineal de (1, 2, −5, 3) y (2, −1, 4, 7)
+
+14.
+```{python}
+a,b,c = symbols('a b c')
+M = Matrix([(1,2,3)])
+a = 2
+b = 2
+X = Matrix([(a, b, c)])
+M.dot(X)
+linsolve([M.dot(X)], (c))
+c = -2
+X = Matrix([(a, b, c)])
+M.dot(X)
+```
+El vector (2,2,-2) es perpendicular a al vector (1,2,3)
+
+```{python}
+a,b,c = symbols('a b c')
+Y = Matrix([(a,b,c)])
+linsolve([M.dot(Y), X.dot(Y)], (a,b,c))
+c = 2
+Y = Matrix([(5*c, -4*c, c)])
+M.dot(Y) == X.dot(Y)
+```
+El vector (10, -8, 2) es perpendicular a (2,2,-2) y (1,2,3)
+
+15.
+```{python}
+u = np.array([1, 2, -3])
+v = np.array([-2, -1, 4])
+w = np.array([0, 2, 0])
+z = np.array([1, 0, -3])
+u @ v
+u @ -v
+(u+v) @ (v-z)
+np.linalg.norm(u)
+np.linalg.norm(z)
+np.linalg.norm(u+v-w+z)
+```
+16.
+```{python}
+A = np.array([2, -3])
+B = np.array([-2, 5])
+AB = B - A
+np.linalg.norm(AB)
+```
+17.
+```{python}
+A = np.array([1, 2])
+B = np.array([-2, 1])
+(A @ B) == 0
+np.degrees(np.math.acos((A @ B)/(np.linalg.norm(A)*np.linalg.norm(B))))
+
+```
+
+```{python}
+A = np.array([1, -1, 1])
+B = np.array([-1, 1, -1])
+(A @ B) == 0
+np.degrees(np.math.acos(round((A @ B)/(np.linalg.norm(A)*np.linalg.norm(B)))))
+```
+
+```{python}
+from sympy import Matrix, linsolve, symbols
+a,b = symbols('a b')
+A = Matrix([a, -b, 1])
+B = Matrix([b, a, 0])
+A.dot(B) == 0
+np.degrees(np.math.acos(round((A.dot(B))/A.norm()*B.norm())))
+```
+
+18.
+```{python}
+A = np.array([1, 2, -3])
+A_unit = V/np.linalg.norm(V)
+A_unit
+```
+```{python}
+B = A_unit*3
+B
+```
+
+```{python}
+v3 = symbols('v3')
+v1 = 2
+v2 = 3
+v3, = eval(str(tuple(linsolve([A[0]*v1+A[1]*v2+A[2]*v3], (v3,)))[0]))
+V = np.array([v1,v2,v3])
+V
+np.degrees(np.math.acos(round((A @ V)/(np.linalg.norm(A)*np.linalg.norm(V)))))
+```
+
+19.
+```{python}
+a, b = symbols('a b', real=True)
+u = Matrix([2, 0, 0])
+v = Matrix([0, 1, -3])
+w = a*u + b*v
+linsolve([w.dot(Matrix([1,1,1]))], (a,b))
+```
+$\vec{w} \perp \overrightarrow{(1, 1, 1)} \Longleftrightarrow a = b$ 
+
+```{python}
+from sympy import nonlinsolve
+e = ((w.norm()**2)**1/2)-1
+nonlinsolve([e,], (a, b))
+```
+La condición para que sea unitario es:
+$$
+a = \sqrt{\frac{\frac{1}{2}-5|b|^2}{2}}
+$$
+```{python}
+W = Matrix([tuple(w),])
+X = Matrix([W, (1,-2,6)])
+
+eq = Matrix([X[:2], X[3:][:2]]).det()
+linsolve([eq], (a,b))
+```
+$$
+\vec{w}\  \parallel (1, −2, 6) \Leftrightarrow a=-\frac{b}{4}
+$$
+
+20.
+Partiendo de la desigualdad de Cauchy-Schwarz:
+$$
+|\langle\vec{x},\vec{y}\rangle|\le||\vec{x}||\cdot||\vec{y}||\\
+|\langle\vec{x},\vec{y}\rangle|\le 3\cdot2\\
+-6 \ge (\vec{x},\vec{y}) \le 6
+$$
+
+Continuando con las propiedades de la norma:
+$$
+||\vec{u}||>0,\ \forall\vec{u}\ne\vec{0}\\
+$$
+Y teniendo en cuenta que el mayor valor que podemos encontrar en los componentes de ambos vectores ha de ser su módulo 
+$$
+0 < ||x − y|| \le \left\{ ||(3,-2)||\atop||(2,-3)||\right.\\ 
+0 < ||x − y|| \le \sqrt{13}
+$$
+De manera que en nuestro caso el mínimo será $\lim_{\to 0}$
+
+En caso de ser los dos vectores perpendiculares $||\vec{x}-\vec{y}||$ coincide con el valor máximo que pude tomar:
+$$
+||\vec{x}-\vec{y}||^2 = ||\vec{x}||^2+||\vec{y}||^2\Leftrightarrow \vec{u}\perp\vec{v}\\
+||\vec{x}-\vec{y}||^2  = 3^2+2^2 = 13\\
+||\vec{x}-\vec{y}|| = \sqrt{13}
+$$
+21.
+$$
+||\vec{x}+\vec{y}||^2 = (\vec{x}+\vec{y})\cdot(\vec{x}+\vec{y})=\\=\vec{x}(\vec{x}+\vec{y})+\vec{y}(\vec{x}+\vec{y}) = \vec{x}\cdot\vec{x}+\vec{x}\cdot\vec{y}+\vec{y}\cdot\vec{x}+\vec{y}\cdot\vec{y} = \\ = ||x||^2+2\cdot\vec{x}\cdot\vec{y}+||y||^2
+$$
+Por lo tanto paartiendo de que $x \le |x|$:
+$$
+||\vec{x}+\vec{y}||^2 \le ||\vec{x}||^2+2\cdot|\vec{x}\cdot\vec{y}|+||\vec{y}||^2
+$$
+Teniendo en cuenta la desigualdad de Cauchy-Schwarz: 
+$$
+||\vec{x}+\vec{y}||^2 \le ||\vec{x}||^2+2\cdot||\vec{x}||\cdot||\vec{y}||+||\vec{y}||^2\\
+||\vec{x}||^2+2\cdot||\vec{x}||\cdot||\vec{y}||+||\vec{y}||^2 = (||\vec{x}|| +||\vec{y}||)^2
+$$
+Conclusión:
+$$
+||\vec{x}+\vec{y}||^2 \le (||\vec{x}|| +||\vec{y}||)^2\\
+\sqrt{||\vec{x}+\vec{y}||^2} \le \sqrt{(||\vec{x}|| +||\vec{y}||)^2}\\
+||\vec{x}+\vec{y}|| \le ||\vec{x}|| +||\vec{y}||
+$$
+22.
+```{python}
+r1,r2,s1,s2 = symbols('r1 r2 s1 s2', reals=True)
+P = Matrix([5, 7])
+Q = Matrix([8, 3])
+S = Matrix([s1, 0])
+PQ = Q - P
+SQ = Q - S
+
+SQ.norm() 
+eq = (s1 - 8)**2 + 9 - PQ.norm()**2
+sols = nonlinsolve([eq], (s1))
+sols
+sol1, = sols.args[0]
+sol2, = sols.args[1]
+```
+$ PQ \perp SQ \rightarrow (PQ, SQ) = 0$
+```{python}
+PQ.dot(SQ.replace(s1, sol1)) == 0
+PQ.dot(SQ.replace(s1, sol2)) == 0
+```
+La solución correcta para $S_1$ tiene es 4
+
+```{python}
+S = S.replace(s1, 4)
+SQ = SQ.replace(s1, 4)
+S
+```
+
+$$
+\vec{PR} \perp \vec{PQ}\rightarrow (\vec{PR}, \vec{PQ}) = 0\\
+||\vec{PR}|| = 5
+$$
+```{python}
+from sympy import sqrt
+
+R = Matrix([r1, r2])
+PR = R - P
+PQPR_dot_product = PQ.dot(PR)
+PR_norm = PR.norm()
+eq_r2, *_ = linsolve([PQPR_dot_product], (r2, r1))
+PR_norm.replace(r2, eq_r2[0])-5
+sol1_r1, sol2_r1 = nonlinsolve([sqrt((3*r1/4 - 15/4)**2 +(r1 - 5)**2) - 5], (r1,))
+sol1_r2, *_ = linsolve([PQPR_dot_product.replace(r1, *sol1_r1)], (r2,))
+sol2_r2, *_ = linsolve([PQPR_dot_product.replace(r1, *sol2_r1)], (r2,))
+
+# R = (1, 4)
+PR.replace(r1, *sol1_r1).replace(r2, *sol1_r2).norm() == 5
+PR.replace(r1, *sol1_r1).replace(r2, *sol1_r2).dot(PQ) == 0
+S[0] > sol1_r1[0] < P[0]
+P[1] > sol1_r2[0] > S[1]
+
+# R = (9, 10)
+PR.replace(r1, *sol2_r1).replace(r2, *sol2_r2).norm() == 5
+PR.replace(r1, *sol2_r1).replace(r2, *sol2_r2).dot(PQ) == 0
+S[0] > sol2_r1[0] < P[0]
+P[1] > sol2_r2[0] > S[1]
+
+R = R.replace(r1, sol1_r1).replace(r2, sol1_r2)
+R
+```
+
+$ R(1, 4)$
+
+El area es la norma al cuadrado de cualquiera de los vectores que forman los lados del cuadrado, es decir 25. El centro del rectangulo es $\frac{||\vec{PS}||}{2}\cdot PS' $
+
+```{python}
+PS = S - P
+PS_unit = PS/PS.norm()
+X = PS_unit * PS.norm()/2
+X
+```
+
+23.
+$$
+(a, b, c),(x, y, z) = ax + 2by + 3cz
+$$
+```{python}
+a,b,c,x,y,z = symbols('a b c x y z')
+u = Matrix([a,b,c])
+u1 = Matrix([a,2*b,3*c])
+
+v = Matrix([x,y,z])
+#Definición formal
+u.dot(v)
+
+#Definición dada
+u1.dot(v)
+
+# Conmutativa
+v.dot(u1) == u1.dot(v)
+
+# Distributiva respecto a la suma
+o,p,q = symbols('o p q')
+w = Matrix([o, p, q])
+u1.dot(v+w) == u1.dot(v) + u1.dot(w)
+
+# Asociativa y conmutativa entre escalares y vectores
+(2*u1).dot(v) == 2 * u1.dot(v) == u1.dot(2*v)
+
+# Si u=0 , entonces (u, u) = 0
+u1_zero = u1.replace(a, 0).replace(b, 0).replace(c, 0)
+u1_zero.dot(u1_zero) == 0
+
+# Norma u = (−1, 0, 2) según definición dada
+u1.dot(v).replace(a, -1).replace(b, 0).replace(c, 2).replace(x, -1).replace(y, 0).replace(z, 2)
+
+# Norma u = (−1, 0, 2) según definición formal
+u.replace(a, -1).replace(b, 0).replace(c, 2).norm()
+
+```
+24.
+
+||x|| = 3, ||y|| = 5 y ||x + y|| = 7
+$$
+||u⃗ +v⃗ ||≤||u⃗ ||+||v⃗ |
+$$
+
+El producto escalar en valor absoluto de dos vectores es menor o igual al producto de sus normas
+$$
+|⟨u⃗ ,v⃗ ⟩|≤||u⃗ ||⋅||v⃗ ||
+$$
+
+```{python}
+x1,x2, y1, y2 = symbols('x1 x2 y1 y2')
+x = Matrix([x1, x2])
+y = Matrix([y1, y2])
+xy = x.dot(y)
+x_norm = 3
+y_norm = 5
+xy_norm = 7
+
+eq = x_norm**2 + 2*xy+y_norm**2 - 49
+eq
+xy = 15/2
+cos_alpha = xy/(x_norm * y_norm)
+
+round(np.degrees(np.arccos(cos_alpha)))
+```
+25.
+```{python}
+u = Matrix([1, 2, -3])
+v = Matrix([0, -2, 1])
+x1, x2, x3 = symbols('x1 x2 x3')
+x = Matrix([x1, x2, x3])
+
+eq1 = u.dot(x)
+eq2 = v.dot(x)
+
+X = Matrix(*linsolve([eq1, eq2], (x1, x2, x3))).replace(x3, 4)
+X
+X.dot(u) == 0 == X.dot(v)
+
+X1 = X/X.norm()
+X1
+X1.norm() == 1 and X1.dot(u) == 0 == X1.dot(v)
+
+X2 = 3*X1
+X2.norm() == 3 and X2.dot(u) == 0 == X2.dot(v)
+```
+
+26.
+```{python}
+A = Matrix([1, -1, 3])
+B = Matrix([1, 0, -2])
+C = Matrix([-2, 4, 0])
+
+AB  = B - A
+AC = C - A
+BC = C - B
+
+AB.dot(AC) == AB.norm()*AC.norm()
+AB.dot(BC) == AB.norm()*BC.norm()
+AC.dot(BC) == AC.norm()*BC.norm()
+```
+$$
+\vec{AB} \not\parallel \vec{AC}\\
+\vec{AB} \not\parallel \vec{BC}\\
+\vec{AC} \not\parallel \vec{BC}
+$$
+```{python}
+d1,d2,d3 = symbols('d1 d2 d3', reals=True)
+D = Matrix([d1, d2, d3])
+AD = D - A
+CD = D - C
+M = Matrix([list(AB), list(CD)])
+M.rank()
+
+# d1
+M1 = Matrix([list(AB[:2]), list(CD[:2])])
+d1, = linsolve([M1.det()], d1).args[0]
+
+# d2
+D = Matrix([d1, d2, d3])
+AD = D - A
+CD = D - C
+M = Matrix([list(BC), list(AD)])
+M1 = Matrix([list(BC[:2]), list(AD[:2])])
+d2, = linsolve([M1.det()], d2).args[0]
+
+#d3
+D = Matrix([d1, d2, d3])
+AD = D - A
+CD = D - C
+M1 = Matrix([list(AB[1:]), list(CD[1:])])
+d3, = linsolve([M1.det()], (d3,)).args[0]
+
+D = Matrix([d1, d2, d3])
+AD = D - A
+CD = D - C
+
+#Comprovación
+abs(CD.dot(AB)) ==  abs(AB.norm()*CD.norm())
+abs(BC.dot(AD)) == abs(BC.norm()*AD.norm())
+```
+$D = (-2, 3 5)$
+
+El area la podemos calcular realizando el producto vectorial de los catetos contiguos del paralelogramo $\vec{AB}$ y $\vec{BC}$
+```{python}
+np.linalg.norm(np.cross(np.array(list(AB)).astype(np.int64), 
+    np.array(list(BC)).astype(np.int64)))
+```
+
+27.
+
+Si $u \wedge v = 0$ con $u \neq 0$ y $v \neq 0 \rightarrow u \parallel v$
+Por lo tanto no son paralelos ya que $u \wedge v = (-3, 0, 0)$, esta opción se podria descartar.
+
+Si $\langle\vec{u},(\vec{u}\wedge\vec{v})\rangle = \langle\vec{v},(\vec{u}\wedge\vec{v})\rangle = 0$ los tres vectores son ortogonales entre si.
+
+```{python}
+u1,u2,u3,v1,v2,v3 = symbols('u1,u2,u3,v1,v2,v3')
+x = Matrix([-3, 0, 0])
+u = Matrix([u1,2,2])
+v = Matrix([v1,-3,3])
+
+u.dot(x)
+v.dot(x)
+
+#u1 = v1 = 0
+u = u.replace(u1, 0)
+v = v.replace(v1, 0)
+x = u.cross(v).replace(u1, 0).replace(v1, 0)
+u.dot(x)
+v.dot(x)
+```
+Por lo tanto todos los vectores son ortogonales de manera que esta podria ser una opción correcta y podriamos descartar que las condiciones del enunciado no pueden cumplirse nunca.
+
+Por otro lado dado que tanto $\vec{u}$ como $\vec{v}$ tienen la componente $x=0$ podemos afirmar que son perpendiculares al eje $OX$. En $u \wedge v$ en cambio al ser las componentes $y = z = 0$ este es paralelo a al eje $OX$.
+
+De manera que la respuesta correcta seria que $\vec{u}$ y $\vec{v}$ son perpendiculares al eje OX.
+
+28.
+Deben ser paralelos, es decir llevar la misma dirección, para que el coseno sea 1.
+
+$$
+A \cdot {B} =|{A} ||{B} |\cos \theta\\
+| \cos \theta |=1\leftrightarrow A||B1
+$$
+El producto vectorial en ese caso sera $0$, ya que si $a \wedge b = 0$ con $a \neq 0$ y $b \neq 0 \rightarrow a \parallel b$
+
+29.
+Tres vectores $\vec {u},\vec {v},\vec {w}$ son coplanares si y sólo si $\vec {u}\cdot (\vec {v}\times \vec {w})=0$.
+```{python}
+d1,d2,d3 = symbols('d1,d2,d3', reals=True)
+A = Matrix([1, 4, -3])
+B = Matrix([-1, 0, 2])
+C = Matrix([5, -4, 1])
+D = Matrix([d1, d2, d3])
+AB = B-A
+BC = C-B
+BD = D-B
+eq, *_ = linsolve([BD.dot(AB.cross(BC))], (d1,d2,d3)).args[0]
+res = eq.replace(d2, 2).replace(d3,4)
+D = D.subs({d1: res, d2: 2, d3: 4})
+BD = D - B
+BD.dot(AB.cross(BC))
+```
+
+30.
+Tres vectores $\vec {u},\vec {v},\vec {w}$ son coplanares si y sólo si $\vec {u}\cdot (\vec {v}\times \vec {w})\neq0$. Por lo tanto modificando la componente $d1$ calculada en el ejercicio anterior obtendremos un punto $D$ no coplanario con $A,B,C$
+```{python}
+(D.replace(-6, 1) - B).dot(AB.cross(BC))
+```
+
