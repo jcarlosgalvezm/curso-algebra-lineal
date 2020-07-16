@@ -1,0 +1,113 @@
+---
+title: "Tarea16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+use_python('~/anaconda3/envs/py38/bin/python')
+```
+
+Pregunta 1
+
+```{python}
+import numpy as np
+import sympy as sp
+lamda = sp.symbols('lamda')
+
+M = sp.Matrix([[1,0,0,1],[2,-1,0,-1],[0,-1,2,0],[-1,0,0,-2]])
+p = M.charpoly(lamda)
+
+print(f'Polinomio característico: {sp.factor(p.as_expr())}')
+
+vals = M.eigenvals()
+for k,v in vals.items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in M.eigenvects():
+  val, mul, vec = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+```
+Pregunta 2
+
+```{python}
+A = sp.Matrix([(1,1,3), (0,2,0), (-2,0,3)])
+B = sp.Matrix([(1,2,0), (2,-1,5), (0,5,1)])
+C = sp.Matrix([(1,1,3), (0,2,0), (-2,0,3)])
+
+for matrix in (A,B,C):
+   matrix.is_diagonalizable()
+```
+
+Pregunta 4
+
+```{python}
+A = sp.Matrix([(1,0,0,1), (2,-1,0,-1), (0,-1,2,0), (-1,0,0,2)])
+p = A.charpoly(lamda)
+print(f'Polinomio característico: {sp.factor(p.as_expr())}')
+print(f'Valores propios: {A.eigenvals().keys()}')
+
+if A.is_diagonalizable():
+   P, D = A.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+Pregunta 5
+
+```{python}
+A = sp.Matrix([(1,-1,-1), (-1,1,-1), (-1,-1,1)])
+vals = A.eigenvals()
+for k,v in vals.items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in A.eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
+
+
+if A.is_diagonalizable():
+   P, D = A.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+
+```
+Pregunta 7
+
+```{python}
+A = sp.Matrix([(3,-1,1), (0,2,0), (1,-1,3)])
+P, D = A.diagonalize()
+P.T.rref()
+print('Base R3:')
+P[:,0], P[:,1], P[:,2]
+```
+
+Pregunta 8
+```{python}
+a = sp.symbols('a')
+A = sp.Matrix([(1,-4,-0), (0,4*a,0), (0,0,3)])
+A.eigenvals()
+sp.solve(sp.Eq(4*a-1))
+sp.solve(sp.Eq(4*a-3))
+
+
+for k,v in A.replace(4*a, 1).eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+for v in A.replace(4*a, 1).eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+
+for k,v in A.replace(4*a, 3).eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+for v in A.replace(4*a, 3).eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+#A.replace(a, 1/4).is_diagonalizable()
+#A.replace(a, 3/4).is_diagonalizable()
+#P.T
+#sp.solve(sp.Eq(4*a - 1), a)
+```
+
