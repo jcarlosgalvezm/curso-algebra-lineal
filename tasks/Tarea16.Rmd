@@ -14,6 +14,7 @@ Pregunta 1
 ```{python}
 import numpy as np
 import sympy as sp
+
 lamda = sp.symbols('lamda')
 
 M = sp.Matrix([[1,0,0,1],[2,-1,0,-1],[0,-1,2,0],[-1,0,0,-2]])
@@ -26,7 +27,7 @@ for k,v in vals.items():
   print(f'Valor: {k} Multiplicidad algebraica: {v}')
 
 for v in M.eigenvects():
-  val, mul, vec = v
+  val, mul, vecs = v
   print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
 ```
 Pregunta 2
@@ -58,8 +59,7 @@ Pregunta 5
 
 ```{python}
 A = sp.Matrix([(1,-1,-1), (-1,1,-1), (-1,-1,1)])
-vals = A.eigenvals()
-for k,v in vals.items():
+for k,v in A.eigenvals().items():
   print(f'Valor: {k} Multiplicidad algebraica: {v}')
 
 for v in A.eigenvects():
@@ -93,21 +93,165 @@ A.eigenvals()
 sp.solve(sp.Eq(4*a-1))
 sp.solve(sp.Eq(4*a-3))
 
+A.replace(4*a, 1).is_diagonalizable()
+A.replace(4*a, 3).is_diagonalizable()
+```
+La matriz $A$ es diagonalizable $\forall\  \alpha \in \mathbb{R}$
 
-for k,v in A.replace(4*a, 1).eigenvals().items():
+Pregunta 9
+```{python}
+a = sp.symbols('a')
+A = sp.Matrix([(a, 2,0), (0,-1,0), (0,0,1)])
+A.eigenvals()
+sp.factor(A.charpoly(lamda).as_expr())
+A.replace(a, 1).is_diagonalizable()
+A.replace(a, -1).is_diagonalizable()
+```
+La matriz $A$ es diagonalizable $\forall\  \alpha \neq -1 \in \mathbb{R}$
+
+Pregunta 10
+```{python}
+a,b = sp.symbols('a b')
+A = sp.Matrix([(0, 1, b), (a**2,0,0), (0,0,1)])
+A.eigenvals()
+sp.factor(A.charpoly(lamda).as_expr())
+A.replace(a, 1).is_diagonalizable()
+A.replace(a, -1).is_diagonalizable()
+```
+La matriz $A$ es diagonalizable $\forall\  \alpha \neq 1 \in \mathbb{R} \lor \forall\  \alpha \neq 1 \in \mathbb{R}\ 	\land\ \forall\  \beta \in \mathbb{R}$
+
+Pregunta 11
+```{python}
+a = sp.symbols('a')
+A = sp.Matrix([(a+1, a-1, a), (a-1,a+1,a), (0,0,1)])
+A.eigenvals()
+sp.factor(A.charpoly(lamda).as_expr())
+A.replace(a, 1).is_diagonalizable()
+A.replace(a, 1/2).is_diagonalizable()
+```
+La matriz $A$ es diagonalizable $\forall\  \alpha \in \mathbb{R}$
+
+Pregunta 12
+```{python}
+A = sp.Matrix([(0, 1), (-1,1)])
+for k,v in A.eigenvals().items():
   print(f'Valor: {k} Multiplicidad algebraica: {v}')
-for v in A.replace(4*a, 1).eigenvects():
+
+for v in A.eigenvects():
   val, mul, vecs = v
   print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
 
-for k,v in A.replace(4*a, 3).eigenvals().items():
+
+if A.is_diagonalizable():
+   P, D = A.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+```{python}
+B = sp.Matrix([(4, -2,-2), (0,-2,0), (-2,2,4)])
+for k,v in B.eigenvals().items():
   print(f'Valor: {k} Multiplicidad algebraica: {v}')
-for v in A.replace(4*a, 3).eigenvects():
+
+for v in B.eigenvects():
   val, mul, vecs = v
   print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
-#A.replace(a, 1/4).is_diagonalizable()
-#A.replace(a, 3/4).is_diagonalizable()
-#P.T
-#sp.solve(sp.Eq(4*a - 1), a)
+  print(f'Subespacio generado: {vecs}')
+
+
+if B.is_diagonalizable():
+   P, D = B.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+```{python}
+C = sp.Matrix([(-3, 5,5), (-1,-0,-2), (-7,3,5)])
+for k,v in C.eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in C.eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
+
+
+if C.is_diagonalizable():
+   P, D = C.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+```{python}
+M = sp.Matrix([(1,1,1,1), (1,1,-1,-1), (1,-1,1,-1), (1,-1,-1,1)])
+
+for k,v in M.eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in M.eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
+
+
+if M.is_diagonalizable():
+   P, D = M.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+Pregunta 13
+
+```{python}
+A = sp.Matrix([(4, 1,), (0,-3)])
+A.is_diagonalizable()
+B = sp.Matrix([(-1,-2,1), (0,2,0), (-1,13,-3)])
+B.is_diagonalizable()
+C = sp.Matrix([(1,-3,2), (3,2,0), (6,-6,4)])
+C.is_diagonalizable()
+```
+Pregunta 14
+
+```{python}
+A = sp.Matrix([(1,-1,0), (2,2,2), (-1,-1,2)])
+for k,v in A.eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in A.eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
+
+
+if A.is_diagonalizable():
+   P, D = A.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+Pregunta 15
+
+```{python}
+A = sp.Matrix([(0,0,4), (1,2,1), (-2,4,2)])
+for k,v in A.eigenvals().items():
+  print(f'Valor: {k} Multiplicidad algebraica: {v}')
+
+for v in A.eigenvects():
+  val, mul, vecs = v
+  print(f'Valor: {val}, Multiplicidad geométrica: {mul}, Vectores propios: {vecs}')
+  print(f'Subespacio generado: {vecs}')
+
+
+if A.is_diagonalizable():
+   P, D = A.diagonalize()
+   print('Diagonalización:')
+   print(P)
+   print(D)
+```
+Pregunta 16
+```{python}
+A = sp.Matrix([(3,1,-1), (5,2,4), (1,-2,0)])
+A.diagonalize()
 ```
 
