@@ -1,0 +1,91 @@
+---
+title: "Tarea17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+use_python('~/anaconda3/envs/py38/bin/python')
+```
+
+Pregunta 1
+
+Variables
+$$
+x1 = cebada\\
+x2 = trigo\\
+x3 = manzanas\\
+x4 = naranjas\\
+x5 = pinos\\
+x6 = chopos\\
+$$
+
+Función objetivo
+$$
+Z =2500x1+3000x2+3500x3+4000x4+5000x5+4500x6
+$$
+
+Restricciones
+$$
+\Bigg\{\begin{matrix}
+x1&+&x2&&&&&&&&&\geq&40\\
+&&&&x3&+&x4&+&x5&+&x6&\leq&35\\
+x1&+&x2&+&x3&+&x4&+&x5&+&x6&\leq&100\\
+\end{matrix}
+$$
+con $x1,x2,x3,x4,x5,x6\geq 0$
+
+
+Estandarizámos:
+$$
+\begin{matrix}
+Z&-&2500x1&-&3000x2&-&3500x3&-&4000x4&-&5000x5&-&4500x6&+&0x7&+&0x8&+&0x9&=&0\\
+&&x1&+&x2&&&&&&&&&-&x7&&&&&=&40\\
+&&&&&&x3&+&x4&+&x5&+&x6&&&+&x8&&&=&35\\
+&&x1&+&x2&+&x3&+&x4&+&x5&+&x6&&&&&+&x9&=&100\\
+\end{matrix}
+$$
+
+$$\begin{matrix}
+Z&x1&x2&x3&x4&x5&x6&x7&x8&x9\\
+1&-2500&-3000&-3500&-4000&-5000&-4500&0&0&0&|&0\\
+0&1&1&0&0&0&0&-1&0&0&|&40\\
+0&0&0&1&1&1&1&0&1&0&|&35\\
+0&1&1&1&1&1&1&0&0&1&|&100\\
+\end{matrix}$$
+
+Resolvemos mediante simplex:
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[-1, -1, 0, 0, 0, 0], [0, 0, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], 
+    [-1, 0, 0, 0, 0, 0], [0, -1, 0, 0, 0, 0], [0, 0, -1, 0, 0, 0], 
+    [0, 0, 0, -1, 0, 0], [0, 0, 0, 0, -1, 0], [0, 0, 0, 0, 0, -1]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([-40, 35, 100, 0, 0, 0, 0, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([-2500, -3000, -3500, -4000, -5000, -4500])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b)
+
+# Print results
+print('Optimal Z value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+
+Pregunta 2
+
+
