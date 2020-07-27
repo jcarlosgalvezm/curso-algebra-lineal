@@ -9,9 +9,9 @@ library(reticulate)
 use_python('~/anaconda3/envs/py38/bin/python')
 ```
 
-Pregunta 1
+#### Pregunta 1
 
-Variables
+Variables:
 $$
 x1 = cebada\\
 x2 = trigo\\
@@ -21,12 +21,12 @@ x5 = pinos\\
 x6 = chopos\\
 $$
 
-Función objetivo
+Función objetivo:
 $$
 Z =2500x1+3000x2+3500x3+4000x4+5000x5+4500x6
 $$
 
-Restricciones
+Restricciones:
 $$
 \Bigg\{\begin{matrix}
 x1&+&x2&&&&&&&&&\geq&40\\
@@ -74,10 +74,10 @@ b = np.array([-40, 35, 100, 0, 0, 0, 0, 0, 0])
 
 # Set the coefficients of the linear objective function vector
 # Note: when maximizing, change the signs of the c vector coefficient
-c = np.array([-2500, -3000, -3500, -4000, -5000, -4500])
+c = np.array([2500, 3000, 3500, 4000, 5000, 4500])
 
 # Solve linear programming problem
-res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
 
 # Print results
 print('Optimal Z value:', round(res.fun*-1, ndigits=2),
@@ -86,7 +86,7 @@ print('Optimal Z value:', round(res.fun*-1, ndigits=2),
       '\nStatus:', res.message)
 ```
 
-Pregunta 2
+#### Pregunta 2
 
 ![](https://raw.githubusercontent.com/jcarlosgalvezm/curso-algebra-lineal/master/tasks/Tarea17-2a.png)
 
@@ -95,7 +95,7 @@ Pregunta 2
 
 ![](https://raw.githubusercontent.com/jcarlosgalvezm/curso-algebra-lineal/master/tasks/Tarea17-2c.png)
 
-Pregunta 3
+#### Pregunta 3
 
 
 ```{python}
@@ -160,6 +160,629 @@ print('Optimal MIN Z value:', round(min_res.fun-8, ndigits=2),
       '\nNumber of iterations performed:', min_res.nit,
       '\nStatus:', min_res.message)
 ```
-Pregunta 4
+#### Pregunta 4
+
+![](https://raw.githubusercontent.com/jcarlosgalvezm/curso-algebra-lineal/master/tasks/Tarea17-4.png)
+
+#### Pregunta 5
+
+|                 | A(x) |  B(y) | condiciones |
+|-----------------|------|-------|-------------|
+| cantidad m²     |  2   |  3    | $\leq$ 570  |
+| tiempo h        |  5   | 8     | $\leq$ 1480 |
+| precio  (Z)     | 8000 | 14000 |             |
 
 
+$$
+Z = 8000x+14000y\\
+2x +3y \leq 570\\
+5x+8y\leq1480 
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[2, 3], [5, 8]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([570, 1480])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([8000, 14000])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+Conviene hacer 185 puertas de tipo B para obtener 25900000 u.m.
+
+#### Pregunta 6
+
+|                 | A(x)  |  B(y)  | condiciones |
+|-----------------|-------|--------|-------------|
+| cantidad Kg     | 30    |  20    | $\leq$ 570  |
+| cantidad  u     |       |        | $\leq$ 18   |
+| precio  (Z)     | 1000  | 7000   |             |
+
+$$
+Z = 1000x+7000y\\
+x+y \leq 18\\
+30x+20y\leq 570
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1, 1], [30, 20], [0, -1], [-1, 0]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([18, 480, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([1000, 700])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+Con tal de maximizar los beneficios se deberian de transportar 12 sacos del tipo A y 6 sacos del tipo B, con lo que se obtienen 16200 u.m.
+
+#### Pregunta 7
+
+
+|   | P1  | P2  | condiciones |
+|---|-----|-----|-------------|
+| H | 500 | 400 | $\geq 3000$ |
+| G | 300 | 300 | $\geq 800$  |
+| M | 200 | 400 | $\geq 700$  |
+| $ | 700 | 850 |             |
+
+$$
+Z = 700x+850y\\
+500x+300y \geq 3000\\
+300x+300y \geq 800\\
+200x+400y \geq 700
+$$
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[-500, -300], [-300, -300],[-200,-400], [0, -1], [-1, 0]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([-3000, -800, -700, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([700, 850])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+
+Para que el coste sea mínimo se necesitan 6 Kg de P1 con lo que tendremos un coste de 4200 u.m.
+
+#### Pregunta 8
+
+|         | vestido  | abrigo  | condiciones |
+|---------|----------|---------|-------------|
+| algodon | 1        | 2       | $\leq 160$  |
+| lana    | 3        | 2       | $\leq 240$  |
+| $1      | 25000    | 35000   |             |
+| $2      | 30000    | 30000   |             |
+| $3      | 35000    | 20000   |             |
+
+$$
+Z_1 = 25000x+35000y\\
+Z_2 = 30000x+30000y\\
+Z_3 = 35000x+20000y\\
+x+2y\leq160\\
+3x+2y\leq240\\
+$$
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1, 2], [3, 2], [0, -1], [-1, 0]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([160, 240, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([25000, 35000])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+a) Para obtener el máximo beneficio se han de vender 40 vestidos y 60 abrigos
+
+```{python}
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([30000, 30000])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+b) Para obtener el máximo beneficio se han de vender 40 vestidos y 60 abrigos
+
+```{python}
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([35000, 20000])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+c) Para obtener el máximo beneficio se han de vender 80 vestidos
+
+#### Pregunta 9
+
+|             | A1(x)| A2(y) | condiciones |
+|-------------|------|-------|-------------|
+| conductores |      |       | $x \leq 22$<br>  $y\leq11$|
+| cantidad    |      |       | $\geq 12$   |
+| plazas      | 20   | 40    | $\geq 400$  |
+| $           | 400  | 720   |             |
+
+$$
+Z = 400x+720y\\
+x\leq 22\\
+y\leq 11\\
+x+y\leq22\\
+x+y\geq12\\
+20x+40y\geq400\\
+x,y\geq0
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1, 0], [0, 1], [1, 1], [-1, -1], [-20, -40], [0,-1], [-1, 0]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([22, 11, 22, -12, -400, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([400, 700])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+Con tal de cumplir el compromiso con el mínimo gasto posible se necesitan 4 autocares pequeños y 8 grandes, lo que tendrá un coste de 7200 u.m.
+
+#### Pregunta 10
+
+|   | F | G |
+|---|---|---|
+| M | 5 | 3 |
+| N | 2 | 3 |
+| O | 1 | 4 |
+
+x1: F -> M
+x2: G -> M
+x3: F -> N
+x4: G -> N
+x5: F -> O
+x6: G -> O
+
+$$
+Z = 5x_1+3x_2+2x_3+3x_4+x_5+4x_6\\
+x_1+x_3+x_5 \leq 12\\
+x_2+x_4+x_6 \leq 16\\
+x_1+x_2 = 9\\
+x_3+x_4 = 12\\
+x_5+x_6 = 7\\
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1,0,1,0,1,0], [0,1,0,1,0,1], [1,1,0,0,0,0], [0,0,1,1,0,0], [0,0,0,0,1,1], [-1,-1,0,0,0,0], [0,0,-1,-1,0,0], [0,0,0,0,-1,-1],
+    [-1,0,0,0,0,0], [0,-1,0,0,0,0], [0,0,-1,0,0,0], [0,0,0,-1,0,0], [0,0,0,0,-1,0], [0,0,0,0,0,-1]])
+
+# Set the inequality constraints vector
+b = np.array([12, 16, 9, 12, 7, -9, -12, -7, 0,0,0,0,0,0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([5, 3, 2, 3, 1,4])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+``` 
+
+Con tal de que el coste sea mínimo se han de entregar:<br>
+- 9 unidades de G -> M <br>
+- 5 unidades de F -> N <br>
+- 7 unidades de G -> N <br>
+- 7 unidades de F -> O <br>
+
+#### Pregunta 11
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[3, 6, 2], [2, 5, 6], [0, -1, 0], [-1, 0, 0], [0, 0, -1]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([1200, 4000, 0, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([6, 6, 2])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+
+
+Una empresa de moda quiere imprimir su logotipo en uno de sus modelos,para ello utilizaran camisetas confeccionadas externamente por un taller y una impresora que usa tinta negra y de color. Dicho taller les ofrece camisetas del tipo A, B y C. Debido a la composición de tejidos de los diferentes modelos de camisetas, para imprimir el logotipo se necesitan 3ml de tinta negra para el modelo A, 6 ml para el modelo B y 2ml para el modelo C, además se necesita 2 ml de tinta de color para el modelo A, 5ml para el modelo B y 6 ml para el modelo C. Diariamente disponen en el almacén de 1200ml de tinta negra y 4000ml de color. El precio de venta de dichas camisetas seria 6 u.m para el modelo A, 6 u.m para el modelo B y 2 u.m para el modelo C. Encuentra en que modelo de camiseta se debería imprimir el logotipo para máximizar el beneficio.
+
+#### Pregunta 12
+
+|          | P1 | P2 |
+|----------|----|----|
+| corte    | 30 |  0 | < 480  
+| embalaje | 20 | 40 | < 480
+| montaje  | 0  | 60 | < 480
+
+$$ 
+Z = 400x+300y\\
+30x \leq 480\\
+20x+40y \leq 480\\
+60y \leq 480 \\
+x \geq 0\\
+y \geq 0 \\
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[30, 0], [20, 40], [0, 60], [-1, 0], [0, -1]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([480, 480, 480, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([400, 300])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z1 value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+
+Las cantidades de estos productos que maximizan el beneficio de la empresa son 16 unidades del producto A y 4 unidades del producto B, obteniendo así 7600 u.m.
+
+#### Pregunta 13
+
+|             | A  |  B | condiciones |
+|-------------|----|----|-------------|
+|programadores| 4  | 2  | $\geq 8$    |
+|analistas    | 2  | 6  | $\geq 5$    |
+|terminales   | 4  | 1  | $\leq 6$    |
+|coste        |1000|1500|             |
+
+$$
+Z = 1000x+1500y\\
+4x+2y \geq 8\\
+2x+6y \geq 5\\
+4x+y \leq 6 \\
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[-4, -2], [-2, -6], [4, 1]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([-8, -5, 6])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([1000, 1500])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+El número de proyectos de cada tipo que debe realizar la empresa con tal de minizar el coste son 1 del tipo A y 2 del tipo B, con ello
+el coste seria de 4000 u.m
+
+#### Pregunta 14
+
+|Materia   |J1 |J2 |J3 |J4 |J5 |J6 |Disponibilidad|
+|----------|---|---|---|---|---|---|--------------|
+|Acero     |1  |4  |0  |4  |2  |0  |800           |
+|Madera    |4  |5  |3  |0  |1  |0  |1160          |
+|Plástico  |0  |3  |8  |0  |1  |0  |1780          |
+|Goma      |2  |0  |1  |2  |1  |5  |1050          |
+|Cartón    |2  |4  |2  |2  |2  |4  |1360          |
+|Pintura   |1  |4  |1  |4  |3  |4  |1260          |
+|Beneficio |30 |45 |24 |26 |24 |30 |              |
+
+$$
+Z = 30j_1+45j_2+24j_3+26j_4+24j_5+30j_6\\
+j_1+4j_2+4j_4+2j_5 \leq 800\\
+4j_1+5j_2+3j_3+j_5\leq 1160\\
+3j_2+8j_3+j_5\leq1780\\
+2j_1+j_3+2j_4+1j_5+5j_6\leq1050\\
+2j_1+4j_2+2j_3+2j_4+2j_5+4j_6\leq1360\\
+j_1+4j_2+1j_3+4j_4+3j_5+4j_6\leq1260\\
+$$
+
+$$
+j_1+ 7j_2+9j_3+4j_4+4j_5+4j_6 - 0.4\cdot(6j_1+9j_2+5j_3+2j_4+3j_5+4j_6) =
+-1.4j_1 + 3.4j_2 + 7j_3 + 3.2j_4 + 2.8j_5 + 2.4j_6 \leq 0
+$$
+
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1,4,0,4,2,0], [4,5,3,0,1,0], [0,3,8,0,1,0], [2,0,1,2,1,5], [2,4,2,2,2,4], [1,4,1,4,3,4],
+    [-1.4, 3.4, 7, 3.2, 2.8, 2.4]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([800, 1160, 1780, 1050, 1360, 1260, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([30, 45, 24, 26, 24, 30])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun*-1, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+Para máximizar el beneficio respetando las restriciones se tendrian que vender 290 juguetes del tipo $J_1$, 81 del tipo $J_4$ y 62 del tipo $J_6$, con lo que se obtendria un beneficio de 12647.5 u.m
+
+#### Pregunta 15
+
+|Vitaminas |A1| A2| A3| A4| A5| A6|
+|----------|--|---|---|---|---|---|
+|A         |1 |1  |0  |3  |2  |1  |
+|B         |1 |2  |1  |1  |1  |0  |
+|C         |0 |1  |2  |0  |2  |2  |
+|D         |1 |0  |0  |1  |0  |1  |
+|Coste     |10|14 |12 |18 |20 |16 |
+
+$$
+Z = 10A_1+14A_2+12A_3+18A_4+20A_5+16A_6\\
+A_1+A_2+3A_4+2A_5+A_6 \leq 32\\
+A_1+A_2+3A_4+2A_5+A_6 \geq 26\\
+A_1+2A_2+A_3+A_4+A_5 \geq 25\\
+A_2+2A_3+2A_5+2A_6 \geq 30\\
+A_1+A_4+A_6\leq 14\\
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[1,1,0,3,2,1], [-1,-1,0,-3,-2,-1], [-1,-2,-1,-1,-1,0], [0,-1,-2,0,-2,-2], [1,0,0,1,0,1]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([32, -26, -25, -30, 14])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([10, 14, 12, 18, 20, 16])
+
+# Solve linear programming problem
+res = lp(c, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun, ndigits=2),
+      '\nx values:', np.round(res.x),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+La cantidad de cada tipo de alimento de la dieta que satisface los requisitos
+nutricionales con un coste mínimo es, 7 unidades del alimento $A_2$, 2 unidades del alimento $A_3$ y 10 del alimento $A_5$, realizando con ello un coste de 310.67 u.m
+
+#### Pregunta 16
+
+|Medidas|$E_1$|$E_2$|Restricciones|
+|-------|-----|-----|-------------|
+|peso   |40   |200  |$\leq$ 37000 |
+|volumen|50   |300  |$\leq$ 200000|
+|Coste  |1.5  |1.8  |             |
+
+$$
+Z = 1.5E_1+1.8E_2\\
+40E_1+200E_2 \leq 37000\\
+50E_1+300E_2 \leq 200000\\
+$$
+
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[40,200], [50,300], [0,-1], [-1,0]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([37000, 200000, 0, 0])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([1.5, 1.8])
+
+# Solve linear programming problem
+res = lp(c*-1, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun*-1, ndigits=5),
+      '\nx values:', np.round(res.x, 5),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+
+La combinación de cajas que hace que la caja más rentable para el transportista es enviar 925 cajas de la empresa $E_1$ y 0 de la empresa de $E_2$
+
+#### Pregunta 17
+
+|            |D    |E    |
+|------------|-----|-----|
+|modelización|6    |4    |            
+|programación|8    |4    |
+|edición     |3    |3    |
+|------------|-----|-----|
+|Beneficio   |300  |200  |
+
+$$
+Z = 300D+200C\\
+17D+11E \leq 102\\
+$$
+```{python}
+# Import required libraries
+import numpy as np
+from scipy.optimize import linprog as lp
+MAX = -1
+MIN = 1
+DIGITS = 0
+# Set the inequality constraints matrix
+# Note: the inequality constraints must be in the form of <=
+A = np.array([[17,11]
+    ])
+
+# Set the inequality constraints vector
+b = np.array([102])
+
+# Set the coefficients of the linear objective function vector
+# Note: when maximizing, change the signs of the c vector coefficient
+c = np.array([300, 200])
+
+# Solve linear programming problem
+res = lp(c*MAX, A_ub=A, b_ub=b, method='revised simplex')
+
+# Print results
+print('Optimal Z value:', round(res.fun*MAX, ndigits=2),
+      '\nx values:', np.round(res.x, 2),
+      '\nNumber of iterations performed:', res.nit,
+      '\nStatus:', res.message)
+```
+Con tal de maximizar los beneficios deben realizar semanalmente 9 proyectos del tipo E completos por lo que podran facturar 1800€ y tendran tiempo para otro proyecto que quedara incompleto, tan solo se realizará el 27%, esto significa que cada 4 semanas podran facturar 10 proyectos a la semana obteniendo 2000€
